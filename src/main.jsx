@@ -10,7 +10,8 @@ import RootLayout from "./layouts/RootLayout";
 import DashboardLayout from "./layouts/dashboardLayout/DashboardLayout";
 import SignUpPage from "./routes/pages/signUpPage/SignUpPage";
 import SignInPage from "./routes/pages/signInPage/SignInPage";
-// import { GoogleOAuthProvider } from "@react-oauth/google";
+import { UserProvider } from "./context/UserContext";
+
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -51,6 +52,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </StrictMode>
 );

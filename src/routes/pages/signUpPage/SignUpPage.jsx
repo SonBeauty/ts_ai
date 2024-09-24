@@ -1,9 +1,12 @@
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
+
 const SignUpPage = () => {
+  const { setUser } = useContext(UserContext);
   const onSuccess = (res) => {
-    console.log("success", res);
+    setUser({ data: res.profileObj, token: res.tokenId });
   };
 
   const clientId =
@@ -24,20 +27,11 @@ const SignUpPage = () => {
   });
 
   return (
-    // <GoogleLogin
-    //   onSuccess={(credentialResponse) => {
-    //     console.log(credentialResponse);
-    //   }}
-    //   onError={(credentialResponse) => {
-    //     console.log(credentialResponse);
-    //   }}
-    // />
     <GoogleLogin
       onSuccess={onSuccess}
       onFailure={onFailure}
       cookiePolicy={"none"}
       clientId={clientId}
-      // buttonText="Login with Google"
       isSignedIn={true}
     />
   );
